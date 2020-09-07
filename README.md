@@ -24,3 +24,4 @@ Within my work on the project I used:
 - official site for [Python documentation](https://www.google.ru/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj7us3jmdXrAhWr_CoKHaFkCesQFjAAegQIBRAC&url=https%3A%2F%2Fwww.python.org%2F&usg=AOvVaw0QREvGsjwHKp2GtoYvs1JH)
 - system of questions and answers about programming [Stack Overflow](https://ru.stackoverflow.com/)
 - mentor help at [Udacity](https://knowledge.udacity.com/?nanodegree=nd104&page=1&project=510&rubric=2118)
+- Used [Codewars](https://www.codewars.com/users/edit) for improving my skills in Python
