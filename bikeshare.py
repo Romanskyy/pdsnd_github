@@ -247,24 +247,27 @@ def raw_data(df):
         df = df.iloc[5:]
 
 
+def checking_type(df):
+    type_of_data = input('Enter what type of data you prefer to see. Enter "r" for "raw data" or "s" for '
+                         '"statistic data"\n')
+    while type_of_data.lower() != 'r' or type_of_data.lower() != 's':
+        if type_of_data.lower() == 'r':
+            raw_data(df)
+            break
+        elif type_of_data.lower() == 's':
+            time_stats(df)
+            station_stats(df)
+            trip_duration_stats(df)
+            user_stats(df)
+            break
+        type_of_data = input('To continue please enter correct option (r/s)\n')
+
+
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        type_of_data = input('Enter what type of data you prefer to see. Enter "r" for "raw data" or "s" for '
-                             '"statistic data"\n')
-        while type_of_data.lower() != 'r' or type_of_data.lower() != 's':
-            if type_of_data.lower() == 'r':
-                raw_data(df)
-                break
-            elif type_of_data.lower() == 's':
-                time_stats(df)
-                station_stats(df)
-                trip_duration_stats(df)
-                user_stats(df)
-                break
-            type_of_data = input('To continue please enter correct option (r/s)\n')
-
+        checking_type(df)
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
