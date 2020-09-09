@@ -178,14 +178,12 @@ def trip_duration_stats(df):
     # TO DO: display total travel time
 
     # count the total travel time
-    sum_df = df['Trip Duration'].sum()
-    print(f'\tthe total travel time for all period is - {sum_df} seconds')
+    print('\tthe total travel time for all period is - {} seconds'.format(df['Trip Duration'].sum()))
 
     # TO DO: display mean travel time
 
     # count the mean travel time
-    mean_df = df['Trip Duration'].mean()
-    print(f'\n\tthe mean value of time is - {mean_df} seconds')
+    print('\n\tthe mean value of time is - {} seconds'.format(df['Trip Duration'].mean()))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
@@ -200,16 +198,14 @@ def user_stats(df):
     # TO DO: Display counts of user types
 
     # count all user types
-    count_of_type = df['User Type'].value_counts()
-    print(f'\tcounts of user types are next:\n\n{count_of_type}\n\n')
+    print('\tcounts of user types are next:\n\n{}\n\n'.format(df['User Type'].value_counts()))
 
     # check if a particular column is in dataframe.
     if 'Gender' not in df.columns:
         print('the dataframe does not contain "Gender" column')
     else:
         # if in it count amount of people different gender
-        count_of_gender = df['Gender'].value_counts()
-        print(f'\tcounts of genders are next:\n\n{count_of_gender}\n\n')
+        print('\tcounts of genders are next:\n\n{}\n\n'.format(df['Gender'].value_counts()))
 
     # the same checking as above but for "Birt Year" column
     if 'Birth Year' not in df.columns:
@@ -223,9 +219,7 @@ def user_stats(df):
         print(f'\tthe earliest client birth is in {int_type_column.min()}\n\n')
 
         # remove Nan values in "Birth Year", changing the data type to "int", count value and find the most common one
-        most_com = int_type_column.value_counts().idxmax()
-        print(f'\tthe most common year of birth is - {most_com} year\n\n')
-
+        print('\tthe most common year of birth is - {} year\n\n'.format(int_type_column.value_counts().idxmax()))
     print("This took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
@@ -247,24 +241,27 @@ def raw_data(df):
         df = df.iloc[5:]
 
 
+def checking_type(df):
+    type_of_data = input('Enter what type of data you prefer to see. Enter "r" for "raw data" or "s" for '
+                         '"statistic data"\n')
+    while type_of_data.lower() != 'r' or type_of_data.lower() != 's':
+        if type_of_data.lower() == 'r':
+            raw_data(df)
+            break
+        elif type_of_data.lower() == 's':
+            time_stats(df)
+            station_stats(df)
+            trip_duration_stats(df)
+            user_stats(df)
+            break
+        type_of_data = input('To continue please enter correct option (r/s)\n')
+
+
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        type_of_data = input('Enter what type of data you prefer to see. Enter "r" for "raw data" or "s" for '
-                             '"statistic data"\n')
-        while type_of_data.lower() != 'r' or type_of_data.lower() != 's':
-            if type_of_data.lower() == 'r':
-                raw_data(df)
-                break
-            elif type_of_data.lower() == 's':
-                time_stats(df)
-                station_stats(df)
-                trip_duration_stats(df)
-                user_stats(df)
-                break
-            type_of_data = input('To continue please enter correct option (r/s)\n')
-
+        checking_type(df)
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
